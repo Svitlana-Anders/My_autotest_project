@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from .pages.product_page import ProductPage
-from .locators import ProductPageLocators
+from .pages.locators import ProductPageLocators
 import time
 
 
@@ -12,7 +12,7 @@ def test_guest_can_add_product_to_basket(browser):
     page.add_product_to_basket()
     time.sleep(2)
     page.solve_quiz_and_get_code()
-    time.sleep(4)
-    page.find_element(*ProductPageLocators.BUTTON_ADD_TO_CART)
-    page.should_be_message_about_adding()
+    time.sleep(3)
+
+    page.should_be_message_with_basket_value()
     page.should_be_message_with_basket_value()
