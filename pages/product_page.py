@@ -1,7 +1,9 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 import re
+import logging
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class ProductPage(BasePage):
     def add_product_to_basket(self):
@@ -21,6 +23,6 @@ class ProductPage(BasePage):
     def should_be_message_with_goods_name(self):
         product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text.strip()
         message_product_name = self.browser.find_element(*ProductPageLocators.MESSAGE_PRODUCT_NAME).text.strip()
-        assert product_name in message_product_name, (
+        assert product_name == message_product_name, \
             f"Expected product name '{product_name}' to be in message '{message_product_name}'"
-        )
+
