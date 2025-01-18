@@ -10,7 +10,7 @@ class ProductPage(BasePage):
 
     def should_be_message_about_adding(self):
         message = self.browser.find_element(*ProductPageLocators.MESSAGE_PRODUCT_NAME)
-        assert message
+        assert message, "Message about adding product to basket is not displayed"
 
     def should_be_message_with_product_price(self):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text.strip()

@@ -25,9 +25,12 @@ class ProductPageLocators:
 class BasePageLocators:
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inc")
-    BASKET_BUTTON = (By.XPATH, "//a[contains(@class, 'btn-default') and text()='Посмотреть корзину']")
+    BASKET_BUTTON = (By.CSS_SELECTOR, "#default > header > div.page_inner > div > div.basket-mini.pull-right.hidden-xs > span > a")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
+
 
 class BasketPageLocators:
     EMPTY_BASKET_MESSAGE = (By.ID, "content_inner")
+    BASKET_ITEMS = (By.CLASS_NAME, "basket-items")
+
 
