@@ -1,9 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
 import re
-import logging
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class ProductPage(BasePage):
     def add_product_to_basket(self):
@@ -12,7 +9,7 @@ class ProductPage(BasePage):
 
     def should_be_message_about_adding(self):
         message = self.browser.find_element(*ProductPageLocators.MESSAGE_PRODUCT_NAME)
-        return message.text.strip()
+        assert message
 
     def should_be_message_with_basket_value(self):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text.strip()
@@ -26,3 +23,10 @@ class ProductPage(BasePage):
         assert product_name == message_product_name, \
             f"Expected product name '{product_name}' to be in message '{message_product_name}'"
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_PRODUCT_NAME), \
+       "Success message is presented, but should not be"
+
+    def message_disappeared_after_adding_product_to_basket(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_PRODUCT_NAME), \
+            "Success message is presented, but should not be"
